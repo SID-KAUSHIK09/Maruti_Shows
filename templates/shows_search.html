@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="manifest" href="static/site.webmanifest">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parameters</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body style="background-image: url('/static/back3.jpg'); background-size: cover;">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <nav class="navbar" style="background-color: #1c384b;" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <b><i>Maruti Shows</i></b>
+        </a>
+      </div>
+    </nav><br><br><br><br>
+    <form action="/shows_search/{{user_sno}}" method="POST"> 
+        <div class="mx-auto" style="width: 600px;">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Movie Name</span>
+            <input type="text" class="form-control" name="movie" pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <div class="invalid-feedback">
+              Must be an Alphabet or space.
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Start Time</span>
+            <input type="text" pattern="^[0-9]+$" title="only integers are allowed" class="form-control" name="start" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <div class="invalid-feedback">
+              Must be an Integer.
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">End Time</span>
+            <input type="text" class="form-control" pattern="^[0-9]+$" title="only integers are allowed" name="end" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <div class="invalid-feedback">
+              Must be an Integer.
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Ratings</span>
+            <input type="text" class="form-control" pattern="^[0-9]+$" title="only integers are allowed" name="rating" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <div class="invalid-feedback">
+              Must be an Integer.
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Tags</span>
+            <input type="text" class="form-control" pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" name="tags" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <div class="invalid-feedback">
+              Must be an Alphabet or space.
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+   </form>     
+
+   {% if shows_rows|length==0 %}<br><br>
+   <div class="alert alert-danger mx-auto" style="width:600px" role="alert">
+       No such shows are present!
+   </div>
+   {% else %}
+<table class="table table-striped table-bordered table-medium table-spaced" style="background-color: white;">
+    <thead>
+        <th>Show Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Ratings</th>
+        <th>Tags</th>
+        <th>Price</th>
+        <th>Venue</th>
+    </thead>
+    <tbody>
+        {% for j in shows_rows %}
+            <tr>
+                <td>{{j.show_name.upper()}}</td>
+                <td>{{j.start_time}}</td>
+                <td>{{j.end_time}}</td>
+                <td>{{j.rating}}</td>
+                <td>{{j.tags.upper()}}</td>
+                <td>{{j.price}}</td>
+                {% for k in all_venues %}
+                {% if j.venue_id==k.sno %}
+                <td>{{k.name.upper()}}, {{k.place.upper()}}, {{k.location.upper()}}</td>
+                {% endif %}
+                {% endfor %}
+                <td><a class="btn btn-dark" href="/book/{{j.sno}}/{{user_sno}}" role="button">Book</a></td>
+              </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+</body>
+</html>

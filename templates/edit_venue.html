@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="static/favicon_io/apple-touch-icon">
+        <link rel="icon" type="image/png" sizes="32x32" href="static/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="static/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="static/favicon_io/site.webmanifest">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Edit Venue</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    </head>
+ 
+    <body style="background-image: url('/static/back3.jpg'); background-size: cover;">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+            <nav class="navbar" style="background-color: #1c384b;" data-bs-theme="dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/">
+                    <b><i>Maruti Shows</i></b>
+                  </a>
+                </div>
+              </nav><br><br><br><br>
+        <div class="mx-auto" style="width: 600px;">
+            <h3 class="text-white">Edit the Venue</h3><br>
+        </div>
+        <form action="/edit_venue/{{Venue.sno}}" method="POST">
+            <div class="mx-auto" style="width: 600px">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Venue Name</span>
+                    <input type="text" name="name" required pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" value="{{Venue.name}}" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                        <div class="invalid-feedback">
+                            Must be an Alphabet or Space.
+                          </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Place</span>
+                    <input type="text" name="place"  class="form-control" value="{{Venue.place}}" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                        
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Location</span>
+                    <input type="text" name="location" required pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" class="form-control"  value="{{Venue.location}}" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                        <div class="invalid-feedback">
+                            Must be an Alphabet or Space.
+                          </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Capacity</span>
+                    <input type="text" name="capacity" required pattern="^[0-9]+$" title="Must be an Integer" class="form-control" value="{{Venue.capacity}}" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                        <div class="invalid-feedback">
+                            Must be an Integer.
+                          </div>
+                </div>
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+    
+        </form>
+    </body> 
+</html>
